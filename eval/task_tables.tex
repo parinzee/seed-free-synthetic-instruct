@@ -1,0 +1,355 @@
+\section{brainstorming}
+\begin{tabular}{lrrrrrrrrrrrrrrrr}
+\hline
+                 &            Fluency ❌
+ Culture ❌
+ Diversity ❌
+(Thai Culture Test Set) &            Fluency ✅
+ Culture ❌
+ Diversity ❌
+(Thai Culture Test Set) &             Fluency ❌
+ Culture ✅
+ Diversity ❌
+(Thai Culture Test Set) &             Fluency ❌
+ Culture ❌
+ Diversity ✅
+(Thai Culture Test Set) &           Fluency ✅
+ Culture ✅
+ Diversity ✅
+(Thai Culture Test Set) &            WangchanX Llama3 8B
+(Thai Culture Test Set) &           Typhoon-v1.5 8B
+(Thai Culture Test Set) &           OpenThai 1.0.0 7B
+(Thai Culture Test Set) &            Fluency ❌
+ Culture ❌
+ Diversity ❌
+(General Test Set) &             Fluency ✅
+ Culture ❌
+ Diversity ❌
+(General Test Set) &             Fluency ❌
+ Culture ✅
+ Diversity ❌
+(General Test Set) &             Fluency ❌
+ Culture ❌
+ Diversity ✅
+(General Test Set) &           Fluency ✅
+ Culture ✅
+ Diversity ✅
+(General Test Set) &            WangchanX Llama3 8B
+(General Test Set) &           Typhoon-v1.5 8B
+(General Test Set) &            OpenThai 1.0.0 7B
+(General Test Set) \\
+\hline
+ BLEU            & 0.00107048 & 4.2546e-06 & 3.44353e-08 & 1.68341e-06 & 0.0415519 &  0.389259  &  1.20081  &  2.12657  & 0.00194063 & 1.72586e-05 & 3.23966e-08 & 4.68049e-06 & 0.0243623 &  0.503953  &  1.10817  &  1.3297    \\
+ METEOR_meteor   & 0.0259393  & 0.0204285  & 0.015397    & 0.0179727   & 0.0567919 &  0.0770846 &  0.10976  &  0.114281 & 0.026465   & 0.0245068   & 0.0174972   & 0.0228217   & 0.0559547 &  0.0856325 &  0.112592 &  0.107356  \\
+ ChrF            & 5.03408    & 3.92242    & 3.03526     & 3.51562     & 9.53891   & 14.5102    & 18.4143   & 22.4216   & 5.14073    & 4.2722      & 3.15306     & 3.94253     & 9.29461   & 16.3753    & 17.8928   & 19.8471    \\
+ ROUGE_rouge1    & 0.0272804  & 0.0183687  & 0.0155098   & 0.00951087  & 0.061963  &  0.120335  &  0.219555 &  0.22009  & 0.0185875  & 0.0191374   & 0.00747333  & 0.0205612   & 0.046581  &  0.153709  &  0.210791 &  0.177166  \\
+ ROUGE_rouge2    & 0.00483092 & 0.00108696 & 0           & 0           & 0.0277026 &  0.0445365 &  0.114222 &  0.111328 & 0.00207754 & 0.00302142  & 0.00101676  & 0.00521036  & 0.0158764 &  0.0718862 &  0.113528 &  0.0842438 \\
+ ROUGE_rougeL    & 0.0283859  & 0.0179579  & 0.0155573   & 0.00964674  & 0.0603621 &  0.114074  &  0.207815 &  0.21449  & 0.0181743  & 0.0190593   & 0.00752253  & 0.0198561   & 0.0454482 &  0.147996  &  0.199322 &  0.166731  \\
+ ROUGE_rougeLsum & 0.0281642  & 0.0186832  & 0.0151754   & 0.0100932   & 0.0599996 &  0.114373  &  0.205803 &  0.215911 & 0.0180575  & 0.0192425   & 0.00739541  & 0.0200029   & 0.0451598 &  0.148382  &  0.200162 &  0.167156  \\
+ [1m[92mBERTScore[0m       & 0.546292   & 0.553789   & 0.515796    & 0.534088    & 0.704776  &  0.689944  &  0.804264 &  0.717642 & 0.557996   & 0.584641    & 0.555512    & 0.585398    & 0.735543  &  0.717551  &  0.797889 &  0.716432  \\
+\hline
+\end{tabular}\section{classification}
+\begin{tabular}{lrrrrrrrrrrrrrrrr}
+\hline
+                 &             Fluency ❌
+ Culture ❌
+ Diversity ❌
+(Thai Culture Test Set) &             Fluency ✅
+ Culture ❌
+ Diversity ❌
+(Thai Culture Test Set) &             Fluency ❌
+ Culture ✅
+ Diversity ❌
+(Thai Culture Test Set) &             Fluency ❌
+ Culture ❌
+ Diversity ✅
+(Thai Culture Test Set) &            Fluency ✅
+ Culture ✅
+ Diversity ✅
+(Thai Culture Test Set) &            WangchanX Llama3 8B
+(Thai Culture Test Set) &            Typhoon-v1.5 8B
+(Thai Culture Test Set) &            OpenThai 1.0.0 7B
+(Thai Culture Test Set) &            Fluency ❌
+ Culture ❌
+ Diversity ❌
+(General Test Set) &             Fluency ✅
+ Culture ❌
+ Diversity ❌
+(General Test Set) &             Fluency ❌
+ Culture ✅
+ Diversity ❌
+(General Test Set) &             Fluency ❌
+ Culture ❌
+ Diversity ✅
+(General Test Set) &           Fluency ✅
+ Culture ✅
+ Diversity ✅
+(General Test Set) &            WangchanX Llama3 8B
+(General Test Set) &            Typhoon-v1.5 8B
+(General Test Set) &            OpenThai 1.0.0 7B
+(General Test Set) \\
+\hline
+ BLEU            & 0.00155297  & 1.36121e-06 & 3.09963e-09 & 1.57784e-07 & 0.00732459 &  0.852764  &  0.15804   &  0.311981  & 0.00789297 & 6.83282e-08 & 1.89748e-08 & 1.64432e-08 & 0.0130907 &  0.328692  &  0.161493  &  0.611001  \\
+ METEOR_meteor   & 0.0232575   & 0.0296289   & 0.0133257   & 0.0169695   & 0.0532052  &  0.0871964 &  0.0824986 &  0.0660129 & 0.0277609  & 0.0277738   & 0.01652     & 0.016962    & 0.0555021 &  0.0751751 &  0.0817567 &  0.0811065 \\
+ ChrF            & 4.62122     & 3.85426     & 2.41306     & 2.73954     & 7.68244    & 14.8844    & 11.7581    & 12.0676    & 5.19383    & 3.39585     & 2.75425     & 2.59741     & 8.03236   & 12.5202    & 11.5547    & 13.7795    \\
+ ROUGE_rouge1    & 0.0105275   & 0.0245764   & 0.0133812   & 0.0102518   & 0.045821   &  0.0569826 &  0.075659  &  0.0377606 & 0.0129264  & 0.0234931   & 0.00608732  & 0.0126956   & 0.0488433 &  0.061871  &  0.0812483 &  0.0647515 \\
+ ROUGE_rouge2    & 0.000714093 & 0.00587648  & 0.000406504 & 0.00189595  & 0.0159232  &  0.011404  &  0.0237425 &  0.0100033 & 0.00204416 & 0.00715314  & 0.000702576 & 0.00307605  & 0.0137896 &  0.023002  &  0.031854  &  0.0221092 \\
+ ROUGE_rougeL    & 0.010083    & 0.0233279   & 0.0133469   & 0.0100806   & 0.044539   &  0.051623  &  0.0734842 &  0.0350493 & 0.0129034  & 0.0233476   & 0.00599702  & 0.012443    & 0.0487891 &  0.0595958 &  0.0795792 &  0.0640441 \\
+ ROUGE_rougeLsum & 0.0099315   & 0.0231573   & 0.0132994   & 0.0100295   & 0.0442838  &  0.0521148 &  0.073586  &  0.0350558 & 0.0125653  & 0.0232305   & 0.00611133  & 0.0126893   & 0.0490346 &  0.0593448 &  0.0798203 &  0.0634641 \\
+ [1m[92mBERTScore[0m       & 0.532239    & 0.62662     & 0.525498    & 0.522791    & 0.735505   &  0.733624  &  0.785245  &  0.664407  & 0.603335   & 0.646142    & 0.563861    & 0.549327    & 0.75549   &  0.756988  &  0.800323  &  0.711126  \\
+ SQuAD_f1        & 0.516238    & 2.48611     & 0.637688    & 0.954221    & 3.46692    &  3.95766   &  3.51443   &  2.04479   & 1.01078    & 2.45984     & 0.957271    & 1.10819     & 3.03048   &  3.67445   &  3.81291   &  3.29735   \\
+\hline
+\end{tabular}\section{closed_qa}
+\begin{tabular}{lrrrrrrrrrrrrrrrr}
+\hline
+                 &            Fluency ❌
+ Culture ❌
+ Diversity ❌
+(Thai Culture Test Set) &             Fluency ✅
+ Culture ❌
+ Diversity ❌
+(Thai Culture Test Set) &            Fluency ❌
+ Culture ✅
+ Diversity ❌
+(Thai Culture Test Set) &             Fluency ❌
+ Culture ❌
+ Diversity ✅
+(Thai Culture Test Set) &            Fluency ✅
+ Culture ✅
+ Diversity ✅
+(Thai Culture Test Set) &           WangchanX Llama3 8B
+(Thai Culture Test Set) &           Typhoon-v1.5 8B
+(Thai Culture Test Set) &             OpenThai 1.0.0 7B
+(Thai Culture Test Set) &            Fluency ❌
+ Culture ❌
+ Diversity ❌
+(General Test Set) &            Fluency ✅
+ Culture ❌
+ Diversity ❌
+(General Test Set) &             Fluency ❌
+ Culture ✅
+ Diversity ❌
+(General Test Set) &             Fluency ❌
+ Culture ❌
+ Diversity ✅
+(General Test Set) &            Fluency ✅
+ Culture ✅
+ Diversity ✅
+(General Test Set) &           WangchanX Llama3 8B
+(General Test Set) &           Typhoon-v1.5 8B
+(General Test Set) &            OpenThai 1.0.0 7B
+(General Test Set) \\
+\hline
+ BLEU            & 0.00636323 & 5.32939e-05 & 1.4345e-10 & 1.37805e-10 & 0.00201054 &  1.19883  &  1.0922   & 0.000797883 & 0.109753   & 0.00207229 & 1.17189e-08 & 3.22974e-18 & 0.00195136 &  4.20198  &  3.68377  & 0.00228455 \\
+ METEOR_meteor   & 0.00976799 & 0.02439     & 0.013451   & 0.00976429  & 0.0690721  &  0.125156 &  0.138927 & 0.0291855   & 0.019133   & 0.0342551  & 0.0150271   & 0.00608326  & 0.0594395  &  0.151462 &  0.159169 & 0.0313194  \\
+ ChrF            & 1.97106    & 3.67049     & 2.08046    & 1.25101     & 7.51192    & 14.6153   & 15.1164   & 4.39963     & 4.15808    & 5.20312    & 2.69727     & 0.954849    & 7.98218    & 19.9342   & 20.4949   & 5.44949    \\
+ ROUGE_rouge1    & 0.0042449  & 0.0286828   & 0.0138738  & 0.00633099  & 0.109389   &  0.168597 &  0.197378 & 0.0509698   & 0.0111572  & 0.0362327  & 0.0134361   & 0.00317144  & 0.0824948  &  0.169934 &  0.214003 & 0.0486482  \\
+ ROUGE_rouge2    & 0.0029255  & 0.00677296  & 0.00171339 & 0           & 0.0598923  &  0.104478 &  0.124958 & 0.0202129   & 0.00372438 & 0.018854   & 0.00327869  & 0.000512295 & 0.0504175  &  0.110293 &  0.134034 & 0.0224421  \\
+ ROUGE_rougeL    & 0.0042449  & 0.0279685   & 0.0135922  & 0.00622216  & 0.107596   &  0.160688 &  0.191399 & 0.04867     & 0.0114859  & 0.0357276  & 0.0131654   & 0.00241751  & 0.0820715  &  0.162972 &  0.204354 & 0.0475077  \\
+ ROUGE_rougeLsum & 0.0042449  & 0.0282336   & 0.0135957  & 0.00640601  & 0.108636   &  0.160691 &  0.190746 & 0.048714    & 0.0111689  & 0.0359233  & 0.0131313   & 0.0024131   & 0.0813952  &  0.163301 &  0.20472  & 0.0470458  \\
+ [1m[92mBERTScore[0m       & 0.181793   & 0.482179    & 0.422742   & 0.369762    & 0.60906    &  0.6149   &  0.656703 & 0.443205    & 0.323505   & 0.562513   & 0.506202    & 0.404795    & 0.684424   &  0.704345 &  0.7757   & 0.56488    \\
+ SQuAD_f1        & 0.285875   & 2.23401     & 0.827696   & 0.233432    & 9.00958    & 14.4599   & 13.3051   & 2.00233     & 0.651493   & 2.85206    & 0.580613    & 0.246098    & 7.87913    & 16.0589   & 14.0044   & 1.75261    \\
+\hline
+\end{tabular}\section{creative_writing}
+\begin{tabular}{lrrrrrrrrrrrrrrrr}
+\hline
+                 &             Fluency ❌
+ Culture ❌
+ Diversity ❌
+(Thai Culture Test Set) &            Fluency ✅
+ Culture ❌
+ Diversity ❌
+(Thai Culture Test Set) &             Fluency ❌
+ Culture ✅
+ Diversity ❌
+(Thai Culture Test Set) &           Fluency ❌
+ Culture ❌
+ Diversity ✅
+(Thai Culture Test Set) &            Fluency ✅
+ Culture ✅
+ Diversity ✅
+(Thai Culture Test Set) &            WangchanX Llama3 8B
+(Thai Culture Test Set) &           Typhoon-v1.5 8B
+(Thai Culture Test Set) &            OpenThai 1.0.0 7B
+(Thai Culture Test Set) &             Fluency ❌
+ Culture ❌
+ Diversity ❌
+(General Test Set) &             Fluency ✅
+ Culture ❌
+ Diversity ❌
+(General Test Set) &             Fluency ❌
+ Culture ✅
+ Diversity ❌
+(General Test Set) &             Fluency ❌
+ Culture ❌
+ Diversity ✅
+(General Test Set) &           Fluency ✅
+ Culture ✅
+ Diversity ✅
+(General Test Set) &            WangchanX Llama3 8B
+(General Test Set) &           Typhoon-v1.5 8B
+(General Test Set) &            OpenThai 1.0.0 7B
+(General Test Set) \\
+\hline
+ BLEU            & 0.000150652 & 8.9958e-06 & 8.79513e-12 & 0.0119302 & 0.00843378 &  0.491402  &  1.37823  &  0.317009  & 0.000330343 & 2.29466e-05 & 1.83985e-12 & 3.48766e-05 & 0.0224666 &  1.15198   &  1.46024  &  1.07927   \\
+ METEOR_meteor   & 0.019403    & 0.020504   & 0.0123068   & 0.0213094 & 0.0368253  &  0.0906445 &  0.128094 &  0.0828465 & 0.0240107   & 0.0239746   & 0.0114007   & 0.0242746   & 0.0506279 &  0.114105  &  0.124667 &  0.110344  \\
+ ChrF            & 3.79272     & 4.25449    & 2.14006     & 3.74195   & 8.18245    & 18.9754    & 20.3507   & 15.5168    & 4.29831     & 4.16437     & 2.06927     & 4.52312     & 9.03332   & 21.9323    & 20.7689   & 21.868     \\
+ ROUGE_rouge1    & 0.010167    & 0.024171   & 0.003125    & 0.0151381 & 0.0492773  &  0.0970789 &  0.349217 &  0.170268  & 0.0211205   & 0.0261299   & 0.00343308  & 0.0150072   & 0.0811666 &  0.156824  &  0.229174 &  0.135643  \\
+ ROUGE_rouge2    & 0           & 0.0105263  & 0           & 0.003125  & 0.025      &  0.0278283 &  0.265545 &  0.100337  & 0.0100446   & 0.0083412   & 0           & 0.00353263  & 0.0337335 &  0.0876035 &  0.14069  &  0.0655009 \\
+ ROUGE_rougeL    & 0.00988235  & 0.024171   & 0.003125    & 0.0141965 & 0.0459991  &  0.0885423 &  0.351579 &  0.168153  & 0.0179493   & 0.0266059   & 0.00336937  & 0.0147367   & 0.0799561 &  0.151775  &  0.221684 &  0.129208  \\
+ ROUGE_rougeLsum & 0.00988235  & 0.024171   & 0.003125    & 0.0146159 & 0.0464708  &  0.0904538 &  0.344719 &  0.168105  & 0.0180095   & 0.0268398   & 0.00340721  & 0.0148356   & 0.0804698 &  0.153735  &  0.22074  &  0.129941  \\
+ [1m[92mBERTScore[0m       & 0.521039    & 0.527419   & 0.47082     & 0.48564   & 0.641296   &  0.641754  &  0.796106 &  0.69703   & 0.523402    & 0.545611    & 0.473586    & 0.50822     & 0.693724  &  0.693307  &  0.770189 &  0.691995  \\
+\hline
+\end{tabular}\section{multiple_choice}
+\begin{tabular}{lrrrrrrrrrrrrrrrr}
+\hline
+                 &            Fluency ❌
+ Culture ❌
+ Diversity ❌
+(Thai Culture Test Set) &           Fluency ✅
+ Culture ❌
+ Diversity ❌
+(Thai Culture Test Set) &             Fluency ❌
+ Culture ✅
+ Diversity ❌
+(Thai Culture Test Set) &             Fluency ❌
+ Culture ❌
+ Diversity ✅
+(Thai Culture Test Set) &           Fluency ✅
+ Culture ✅
+ Diversity ✅
+(Thai Culture Test Set) &            WangchanX Llama3 8B
+(Thai Culture Test Set) &            Typhoon-v1.5 8B
+(Thai Culture Test Set) &            OpenThai 1.0.0 7B
+(Thai Culture Test Set) &            Fluency ❌
+ Culture ❌
+ Diversity ❌
+(General Test Set) &            Fluency ✅
+ Culture ❌
+ Diversity ❌
+(General Test Set) &            Fluency ❌
+ Culture ✅
+ Diversity ❌
+(General Test Set) &             Fluency ❌
+ Culture ❌
+ Diversity ✅
+(General Test Set) &           Fluency ✅
+ Culture ✅
+ Diversity ✅
+(General Test Set) &            WangchanX Llama3 8B
+(General Test Set) &             Typhoon-v1.5 8B
+(General Test Set) &            OpenThai 1.0.0 7B
+(General Test Set) \\
+\hline
+ BLEU            & 0.00414669 & 0.0393742 & 1.13249e-06 & 2.88299e-10 & 0.0354694 &  2.6511    & 0.00021654 &  2.29867   & 0.0129029  & 0.0268288  & 1.2867e-06 & 2.89345e-15 & 0.0553992 &  0.37174   & 1.49859e-06 &  1.70476   \\
+ METEOR_meteor   & 0.0275571  & 0.0700483 & 0.019116    & 0.0151387   & 0.0773552 &  0.116083  & 0.0462448  &  0.119771  & 0.0264973  & 0.0577794  & 0.019902   & 0.00933658  & 0.073984  &  0.0798573 & 0.0444892   &  0.094027  \\
+ ChrF            & 5.00455    & 8.76139   & 3.29264     & 1.80647     & 9.895     & 15.9491    & 5.54405    & 18.7931    & 5.0252     & 7.85947    & 3.23118    & 0.952932    & 9.59882   & 11.0007    & 4.4395      & 15.0212    \\
+ ROUGE_rouge1    & 0.0210122  & 0.0813033 & 0.0450502   & 0.0398629   & 0.105143  &  0.176954  & 0.15572    &  0.175598  & 0.0146322  & 0.0381535  & 0.0393416  & 0.0334112   & 0.0669024 &  0.123358  & 0.13344     &  0.101004  \\
+ ROUGE_rouge2    & 0.00223438 & 0.0164151 & 0.00293758  & 0.00317125  & 0.0282483 &  0.0464828 & 0.0302072  &  0.0430803 & 0.00233498 & 0.00934571 & 0.00157721 & 0.00440936  & 0.0175866 &  0.0338958 & 0.0222857   &  0.0166293 \\
+ ROUGE_rougeL    & 0.0212527  & 0.0802558 & 0.0430238   & 0.0387127   & 0.0977403 &  0.167068  & 0.147871   &  0.160207  & 0.0138711  & 0.0370306  & 0.0396152  & 0.0327742   & 0.0629068 &  0.114439  & 0.134009    &  0.0938568 \\
+ ROUGE_rougeLsum & 0.0208178  & 0.0811791 & 0.0429023   & 0.0394632   & 0.0988676 &  0.16787   & 0.148871   &  0.160486  & 0.0141346  & 0.037491   & 0.0397211  & 0.0332846   & 0.0631733 &  0.114341  & 0.133821    &  0.0939179 \\
+ [1m[92mBERTScore[0m       & 0.536479   & 0.663212  & 0.528599    & 0.476383    & 0.703647  &  0.699089  & 0.531978   &  0.719433  & 0.564068   & 0.653692   & 0.541661   & 0.421885    & 0.708973  &  0.668307  & 0.547984    &  0.699661  \\
+ SQuAD_f1        & 0.72813    & 5.1159    & 1.37836     & 1.41369     & 6.38759   & 10.9673    & 7.18201    &  7.20757   & 0.841293   & 2.97611    & 1.0932     & 0.863948    & 5.0477    &  6.62698   & 6.60105     &  4.21672   \\
+\hline
+\end{tabular}\section{open_qa}
+\begin{tabular}{lrrrrrrrrrrrrrrrr}
+\hline
+                 &             Fluency ❌
+ Culture ❌
+ Diversity ❌
+(Thai Culture Test Set) &             Fluency ✅
+ Culture ❌
+ Diversity ❌
+(Thai Culture Test Set) &            Fluency ❌
+ Culture ✅
+ Diversity ❌
+(Thai Culture Test Set) &             Fluency ❌
+ Culture ❌
+ Diversity ✅
+(Thai Culture Test Set) &           Fluency ✅
+ Culture ✅
+ Diversity ✅
+(Thai Culture Test Set) &            WangchanX Llama3 8B
+(Thai Culture Test Set) &            Typhoon-v1.5 8B
+(Thai Culture Test Set) &            OpenThai 1.0.0 7B
+(Thai Culture Test Set) &            Fluency ❌
+ Culture ❌
+ Diversity ❌
+(General Test Set) &             Fluency ✅
+ Culture ❌
+ Diversity ❌
+(General Test Set) &             Fluency ❌
+ Culture ✅
+ Diversity ❌
+(General Test Set) &             Fluency ❌
+ Culture ❌
+ Diversity ✅
+(General Test Set) &           Fluency ✅
+ Culture ✅
+ Diversity ✅
+(General Test Set) &            WangchanX Llama3 8B
+(General Test Set) &            Typhoon-v1.5 8B
+(General Test Set) &            OpenThai 1.0.0 7B
+(General Test Set) \\
+\hline
+ BLEU            & 0.000534926 & 1.60731e-05 & 2.9373e-10 & 7.98605e-07 & 0.0165044 &  0.823808  &  0.698341  &  0.752153  & 0.00215556 & 8.39502e-06 & 7.62439e-10 & 4.93175e-07 & 0.0358334 &  0.458808  &  0.708727  &  1.22418   \\
+ METEOR_meteor   & 0.0207961   & 0.0264857   & 0.0122401  & 0.0173458   & 0.0521623 &  0.0756391 &  0.0930189 &  0.079754  & 0.023881   & 0.0238664   & 0.0126179   & 0.0172323   & 0.0563442 &  0.0756435 &  0.0952374 &  0.0957796 \\
+ ChrF            & 4.16747     & 4.17419     & 2.25756    & 2.97147     & 8.27078   & 14.6405    & 15.3029    & 15.7745    & 4.68846    & 3.9328      & 2.32872     & 3.07848     & 9.17788   & 14.1225    & 15.1843    & 18.1034    \\
+ ROUGE_rouge1    & 0.0102516   & 0.0256877   & 0.0103814  & 0.0222278   & 0.0625507 &  0.102986  &  0.126393  &  0.111918  & 0.0152157  & 0.0163222   & 0.0119274   & 0.0145749   & 0.0388836 &  0.0922288 &  0.123751  &  0.137369  \\
+ ROUGE_rouge2    & 0.000394106 & 0.00693747  & 0.00153886 & 0.00451958  & 0.0246696 &  0.0459752 &  0.0673755 &  0.0573456 & 0.00270112 & 0.00421363  & 0.00072972  & 0.00351779  & 0.0137264 &  0.0384845 &  0.0618202 &  0.0709475 \\
+ ROUGE_rougeL    & 0.00913138  & 0.0253108   & 0.0103055  & 0.0221897   & 0.0612241 &  0.0980677 &  0.122867  &  0.107689  & 0.0145504  & 0.016223    & 0.0120136   & 0.0145475   & 0.0385566 &  0.0874589 &  0.118346  &  0.131626  \\
+ ROUGE_rougeLsum & 0.00912972  & 0.0252104   & 0.0102424  & 0.0223534   & 0.0613703 &  0.0981368 &  0.122896  &  0.107683  & 0.0145465  & 0.0162761   & 0.0120514   & 0.0144059   & 0.0385447 &  0.0873488 &  0.118684  &  0.132117  \\
+ [1m[92mBERTScore[0m       & 0.523966    & 0.58745     & 0.497921   & 0.504401    & 0.714657  &  0.682265  &  0.769451  &  0.680937  & 0.584927   & 0.602722    & 0.518876    & 0.531986    & 0.759714  &  0.727774  &  0.802768  &  0.74196   \\
+ SQuAD_f1        & 0.458401    & 1.28683     & 0.439514   & 0.68259     & 2.40773   &  3.80257   &  4.37246   &  3.07325   & 0.927883   & 0.868427    & 0.680938    & 0.696399    & 2.37146   &  3.35005   &  4.6064    &  3.95224   \\
+\hline
+\end{tabular}\section{summarization}
+\begin{tabular}{lrrrrrrrrrrrrrrrr}
+\hline
+                 &             Fluency ❌
+ Culture ❌
+ Diversity ❌
+(Thai Culture Test Set) &           Fluency ✅
+ Culture ❌
+ Diversity ❌
+(Thai Culture Test Set) &            Fluency ❌
+ Culture ✅
+ Diversity ❌
+(Thai Culture Test Set) &             Fluency ❌
+ Culture ❌
+ Diversity ✅
+(Thai Culture Test Set) &            Fluency ✅
+ Culture ✅
+ Diversity ✅
+(Thai Culture Test Set) &           WangchanX Llama3 8B
+(Thai Culture Test Set) &           Typhoon-v1.5 8B
+(Thai Culture Test Set) &            OpenThai 1.0.0 7B
+(Thai Culture Test Set) &            Fluency ❌
+ Culture ❌
+ Diversity ❌
+(General Test Set) &           Fluency ✅
+ Culture ❌
+ Diversity ❌
+(General Test Set) &            Fluency ❌
+ Culture ✅
+ Diversity ❌
+(General Test Set) &             Fluency ❌
+ Culture ❌
+ Diversity ✅
+(General Test Set) &            Fluency ✅
+ Culture ✅
+ Diversity ✅
+(General Test Set) &           WangchanX Llama3 8B
+(General Test Set) &           Typhoon-v1.5 8B
+(General Test Set) &           OpenThai 1.0.0 7B
+(General Test Set) \\
+\hline
+ BLEU            & 0.105589    & 0.0268397 & 0.00136943 & 0.000157995 &  0.570851  &  9.25474  & 11.7087   &  0.819309  & 0.161134   & 0.011572  & 1.0535e-05 & 2.39209e-09 &  0.370206  &  7.55199  & 11.1354   & 0.17671   \\
+ METEOR_meteor   & 0.0287864   & 0.0647396 & 0.0319787  & 0.0233364   &  0.126694  &  0.219118 &  0.28893  &  0.0807258 & 0.030226   & 0.0518832 & 0.0243024  & 0.0150466   &  0.11718   &  0.198221 &  0.283673 & 0.0643292 \\
+ ChrF            & 6.07683     & 7.60033   & 5.08062    & 3.11575     & 15.1882    & 27.3593   & 33.9795   & 12.8202    & 5.89448    & 6.47629   & 3.52617    & 1.88203     & 13.8212    & 24.8079   & 32.3853   & 9.78058   \\
+ ROUGE_rouge1    & 0.00421565  & 0.0500053 & 0.0251758  & 0.0292667   &  0.109694  &  0.210972 &  0.322182 &  0.082541  & 0.0131572  & 0.0523351 & 0.0210117  & 0.0133964   &  0.095523  &  0.217985 &  0.322686 & 0.063455  \\
+ ROUGE_rouge2    & 0.000896906 & 0.0205668 & 0.00519928 & 0.00946985  &  0.0519434 &  0.124818 &  0.197312 &  0.0405533 & 0.00240068 & 0.0223466 & 0.00305111 & 0.00364036  &  0.0434654 &  0.130318 &  0.197616 & 0.0292655 \\
+ ROUGE_rougeL    & 0.00416781  & 0.0480092 & 0.0246666  & 0.0287692   &  0.107986  &  0.202692 &  0.307065 &  0.0793149 & 0.0127155  & 0.0509218 & 0.0206348  & 0.0129285   &  0.0937173 &  0.207184 &  0.305162 & 0.0603978 \\
+ ROUGE_rougeLsum & 0.00413037  & 0.0483458 & 0.0247601  & 0.0288701   &  0.108179  &  0.203269 &  0.307227 &  0.0794922 & 0.0127237  & 0.0509294 & 0.0206086  & 0.0128701   &  0.0934196 &  0.207443 &  0.305348 & 0.0604874 \\
+ [1m[92mBERTScore[0m       & 0.371064    & 0.5715    & 0.512506   & 0.477554    &  0.757715  &  0.75741  &  0.840567 &  0.593087  & 0.405036   & 0.582742  & 0.51957    & 0.465372    &  0.786652  &  0.783709 &  0.859675 & 0.599647  \\
+\hline
+\end{tabular}
