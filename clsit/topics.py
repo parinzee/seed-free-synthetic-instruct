@@ -51,6 +51,7 @@ class TopicGenerator:
 
     def _save_topics(self, topics, file_name):
         file_path = Path(settings.general.output_dir) / file_name
+        file_path.parent.mkdir(parents=True, exist_ok=True)
         with open(file_path, "w") as f:
             for topic in topics:
                 f.write(f"{topic}\n")
