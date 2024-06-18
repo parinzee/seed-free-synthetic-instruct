@@ -39,7 +39,7 @@ class QAPrompter(BasePrompter):
             messages = [
                 {
                     "role": "user",
-                    "content": f"Generate 5 questions focusing on different aspects of this given context. Use only the given context to create your questions. Do no use external information.\n\n<context>\n{context}\n</context>\n\nEnsure your output is in the format of a list of dictionaries, where each dictionary contains a 'question' key and an 'answer' key. Your output should be one line in the aforementioned format without anything else.",
+                    "content": f"Generate 5 highly detailed and specialized questions and answeres focusing on different aspects of this given context. Use only the given context to create your questions. The longer the answers are, with more detailed responses, the better. Prioritize extreme explaination and detail. Do no use external information.\n\n<context>\n{context}\n</context>\n\nEnsure your output is in the format of a list of dictionaries, where each dictionary contains a 'question' key and an 'answer' key. Your output should be one line in the aforementioned format without anything else.",
                 }
             ]
 

@@ -40,7 +40,7 @@ class SummarizationPrompter(BasePrompter):
             messages = [
                 {
                     "role": "user",
-                    "content": f"Generate a concise summary in {summary_style} format of the following context related to {topic}:\n\n<context>\n{context}\n</context>\n\nEnsure your output is in the format of a dictionary with a 'summary' and 'instruction' key, where 'summary' is your summary in the specified format and 'instruction' is a sentence you would instruct someone to get this summary (for example: \"Please summarize in {summary_style} format the follwing text passage\"). Your output should be one line in the aforementioned format, and in the correct language without anything else.",
+                    "content": f"Generate a highly detailed summary in {summary_style} format of the following context related to {topic}:\n\n<context>\n{context}\n</context>\n\nEnsure your output is in the format of a dictionary with a 'summary' and 'instruction' key, where 'summary' is your summary in the specified format and 'instruction' is a sentence you would instruct someone to get this summary (for example: \"Please summarize in {summary_style} format the follwing text passage\"). Your output should be one line in the aforementioned format, and in the correct language without anything else.",
                 }
             ]
 
