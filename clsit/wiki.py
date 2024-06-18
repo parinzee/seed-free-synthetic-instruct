@@ -5,16 +5,19 @@ import wikipedia
 
 from .config import settings
 
-wikipedia.set_lang(settings.general.wiki_lang)
 
 class WikipediaContextRetriever:
     """Class for retrieving context from Wikipedia"""
     def __init__(self):
         self.retrieved_pages = []
+        wikipedia.set_lang(settings.general.wiki_lang)
     
     def get_wiki_page(self, topic):
         """Find a Wikipedia page related to the given topic"""
         results = wikipedia.search(topic, results=15)
+
+        if len(results) == 0:
+            results = wikipedia.random(pages=10)
 
         # Randomly select a search result
         search_result = random.choice(results)
