@@ -7,6 +7,7 @@ import logging
 from clsit.export import export_data
 from clsit.clean import clean_data
 from clsit.diversify import diversify_data
+from clsit.qc import quality_control
 from clsit.models import get_model_wrapper
 from clsit.config import settings
 
@@ -97,17 +98,24 @@ if __name__ == "__main__":
 
     # Parse the command line arguments
     parser = argparse.ArgumentParser(description="Cross-Lingual Self-Instruct Finetuning")
-    # Add generate command
     parser.add_argument("--generate", action="store_true", help="Generate data")
     parser.add_argument("--clean", action="store_true", help="Clean the generated data")
     parser.add_argument("--diversify", action="store_true", help="Diversify the generated data")
+    parser.add_argument("--qc", action="store_true", help="Run quality control on the generated data")
     parser.add_argument("--export", action="store_true", help="Export the generated data for training with axolotl")
     parser.add_argument("--val_size", type=float, default=0.125, help="Fractionn of validation set size")
+    parser.add_argument("config", type=str, help="Path to the configuration file", default="settings.toml")
 
     args = parser.parse_args()
 
+    if args.config:
+        settings.load_file(args.config)
+
     if args.generate:
         generate(logger)
+    
+    if args.qc:
+        quality_control(logger)
     
     if args.clean:
         clean_data(logger)
