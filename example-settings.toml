@@ -50,6 +50,7 @@ response_filters = [
 
 [culture]
 enabled = true
+num_topics = 400
 prompt = 'You are a native Thai person with expert knowledge of Thai culture, history, language, and customs. Ensure that everything you act, do, say, and generate matches with this fact.'
 
 # Configuration for the different tasks
@@ -78,12 +79,20 @@ context_styles = [ # Used contextual tasks (e.g. summarization, translation)
     max_tokens = 1000
 
     [tasks.multiple_choice]
-    count = 250
+    count = 1750
     batch_size = 10
 
+    temperature = 0.4
+    max_tokens = 4000
+
     [tasks.summarization]
-    count = 350
+    count = 1500
     batch_size = 10
+    summary_styles = [
+        "bullet point",
+        "paragraph",
+        "numbered list",
+    ]
 
     [tasks.translation]
     count = 250
@@ -94,9 +103,28 @@ context_styles = [ # Used contextual tasks (e.g. summarization, translation)
     batch_size = 10
 
     [tasks.conversation]
-    count = 750
+    count = 2000 
     batch_size = 10
 
+    temperature = 0.8
+    max_tokens = 1500
+
     [tasks.jokes]
-    count = 250
+    count = 500
     batch_size = 10
+
+    temperature = 0.5
+    max_tokens = 1500
+
+[cleaning] # Configuration for the cleaning process
+remove_duplicates = true
+remove_empty_instructions = true
+remove_empty_outputs = true
+
+use_cosine_filter = true
+cosine_similarity_threshold = 0.95
+embed_model = "BAAI/bge-m3"
+
+[quality_control]
+temperature = 0.8
+max_tokens = 1500
