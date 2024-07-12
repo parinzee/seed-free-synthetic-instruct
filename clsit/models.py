@@ -1,5 +1,7 @@
 import anthropic
 import ollama
+import openai
+from groq import Groq
 
 from clsit.config import settings
 
@@ -31,6 +33,31 @@ def _get_language_name(language_code):
     except KeyError:
         raise ValueError(f"Invalid language code: {language_code}")
 
+class GroqWrapper:
+    def __init__(
+        self,
+        model_name="llama3-70b-8192",
+        api_key=None,
+    ):
+        self.client = Groq(
+            api_key=api_key,
+        )
+
+        self.model_name = model_name
+    
+    def generate(self, messages, system, **kwargs):
+        # Add the system prompt to the messages
+        messages = [
+            {"role": "system", "content": system},
+            *messages,
+        ]
+
+        response = self.client.chat.completions.create(
+            model=self.model_name, messages=messages, stream=False, **kwargs
+        )
+
+        return response.choices[0].message.content, response
+
 class OllamaWrapper:
     def __init__(
         self,
@@ -55,19 +82,82 @@ class OllamaWrapper:
 
         return response["message"]["content"], response
 
-def get_model_wrapper():
-    if settings.model.anthropic.use:
-        model_wrapper = ClaudeWrapper(
-            model_name=settings.model.anthropic.model,
-            api_key=settings.model.anthropic.api_key,
+class VLLMWrapper:
+    def __init__(
+        self,
+        model_name="Meta-Llama-3-70B-Instruct-AWQ",
+        host_url=None,
+        api_key=None,
+    ):
+        self.client = openai.OpenAI(
+            api_key=api_key,
+            base_url=host_url,
         )
-    elif settings.model.ollama.use:
-        model_wrapper = OllamaWrapper(
-            model_name=settings.model.ollama.model,
-            host_url=settings.model.ollama.host_url,
+
+        self.model_name = model_name
+
+    def generate(self, messages, system, **kwargs):
+        # Add the system prompt to the messages
+        messages = [
+            {"role": "system", "content": system},
+            *messages,
+        ]
+
+        response = self.client.chat.completions.create(
+            model=self.model_name, messages=messages, stream=False, extra_body=kwargs
         )
+
+        return response.choices[0].message.content, response
+
+def get_model_wrapper(qc=False):
+    if not qc:
+        if settings.model.anthropic.use:
+            model_wrapper = ClaudeWrapper(
+                model_name=settings.model.anthropic.model,
+                api_key=settings.model.anthropic.api_key,
+            )
+        elif settings.model.groq.use:
+            model_wrapper = GroqWrapper(
+                model_name=settings.model.groq.model,
+                api_key=settings.model.groq.api_key,
+            )
+        elif settings.model.ollama.use:
+            model_wrapper = OllamaWrapper(
+                model_name=settings.model.ollama.model,
+                host_url=settings.model.ollama.host_url,
+            )
+        elif settings.model.vllm.use:
+            model_wrapper = VLLMWrapper(
+                model_name=settings.model.vllm.model,
+                host_url=settings.model.vllm.host_url,
+                api_key=settings.model.vllm.api_key if settings.model.vllm.api_key else None,
+            )
+        else:
+            raise NotImplementedError()
     else:
-        raise NotImplementedError("Only Anthropic models are supported at the moment.")
+        if settings.model.anthropic.use_qc:
+            model_wrapper = ClaudeWrapper(
+                model_name=settings.model.anthropic.model,
+                api_key=settings.model.anthropic.api_key,
+            )
+        elif settings.model.groq.use_qc:
+            model_wrapper = GroqWrapper(
+                model_name=settings.model.groq.model,
+                api_key=settings.model.groq.api_key,
+            )
+        elif settings.model.ollama.use_qc:
+            model_wrapper = OllamaWrapper(
+                model_name=settings.model.ollama.model,
+                host_url=settings.model.ollama.host_url,
+            )
+        elif settings.model.vllm.use_qc:
+            model_wrapper = VLLMWrapper(
+                model_name=settings.model.vllm.model,
+                host_url=settings.model.vllm.host_url,
+                api_key=settings.model.vllm.api_key,
+            )
+        else:
+            raise NotImplementedError()
     
     return model_wrapper
 

@@ -5,16 +5,16 @@ from pathlib import Path
 from clsit.config import settings
 
 class BasePrompter:
-    def __init__(self, model_wrapper, data_queue, topics, done_event, prompter_name):
+    def __init__(self, model_wrapper, data_queue, topics, done_event, prompter_name, rank=0):
         self.wrapper = model_wrapper
         self.data_queue = data_queue
         self.topics = deepcopy(topics)
         self.done_event = done_event
         self.send_count = self.get_initial_count()
-        self.prompter_name = prompter_name
+        self.prompter_name = deepcopy(prompter_name)
 
         # Create logger for each prompter
-        self.logger = logging.getLogger(prompter_name)
+        self.logger = logging.getLogger(f"{prompter_name}-{rank}")
         self.logger.setLevel(logging.INFO)
 
         # Create a stream handler for the logger
@@ -59,7 +59,7 @@ class BasePrompter:
         raise NotImplementedError("The run method must be implemented in the derived class.")
 
     @classmethod
-    def start(cls, model_wrapper, data_queue, topics, done_event):
-        prompter = cls(model_wrapper, data_queue, topics, done_event)
+    def start(cls, model_wrapper, data_queue, topics, done_event, rank=0):
+        prompter = cls(model_wrapper, data_queue, topics, done_event, rank)
         prompter.run()
         done_event.wait()

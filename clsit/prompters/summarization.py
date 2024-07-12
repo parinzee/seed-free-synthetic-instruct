@@ -7,9 +7,9 @@ from ..wiki import WikipediaContextRetriever
 from clsit.models import get_system_prompt
 
 class SummarizationPrompter(BasePrompter):
-    def __init__(self, model_wrapper, data_queue, topics, done_event):
+    def __init__(self, model_wrapper, data_queue, topics, done_event, rank=0):
         self.prompter_name = "summarization"
-        super().__init__(model_wrapper, data_queue, topics, done_event, self.prompter_name)
+        super().__init__(model_wrapper, data_queue, topics, done_event, self.prompter_name, rank)
 
         summary_schema = {
             "instruction": {"type": "string", "required": True},
@@ -40,21 +40,29 @@ class SummarizationPrompter(BasePrompter):
             messages = [
                 {
                     "role": "user",
-                    "content": f"Generate a highly detailed summary in {summary_style} format of the following context related to {topic}:\n\n<context>\n{context}\n</context>\n\nEnsure your output is in the format of a dictionary with a 'summary' and 'instruction' key, where 'summary' is your summary in the specified format and 'instruction' is a sentence you would instruct someone to get this summary (for example: \"Please summarize in {summary_style} format the follwing text passage\"). Your output should be one line in the aforementioned format, and in the correct language without anything else.",
+                    "content": f"Generate a very very long and highly detailed summary in {summary_style} format of the following context related to {topic}:\n\n<context>\n{context}\n</context>\n\nEnsure your output is in the format of a dictionary with a 'summary' and 'instruction' key, where 'summary' is your summary in the specified format and 'instruction' is a sentence you would instruct someone to get this summary (for example: \"Please summarize in {summary_style} format the follwing text passage\"). Your output should be one line in the aforementioned format, and in the correct language without anything else.",
+                },
+                {
+                    "role": "assistant",
+                    "content": '{"summary": "'
                 }
             ]
 
             response, _ = self.wrapper.generate(
                 messages,
                 temperature=abs(
-                    settings.tasks.summarization.temperature - (0.1 * n)
+                    round(settings.tasks.summarization.temperature - (0.1 * n), 3)
                 ),
                 max_tokens=settings.tasks.summarization.max_tokens,
                 system=get_system_prompt(),
             )
 
             try:
-                response = eval(response)
+                if response.startswith('{"summary": "'):
+                    response = eval(response)
+                else:
+                    response = eval('{"summary": "' + response)
+
                 if isinstance(response, dict):
                     if self.summary_validator.validate(response):
                         return response
@@ -70,16 +78,19 @@ class SummarizationPrompter(BasePrompter):
             topic = random.choice(self.topics)
             self.topics.remove(topic)
 
-            wiki_contexts = retriever.get_contexts(topic)
-            self.logger.info(f"Retrieved {len(wiki_contexts)} contexts from Wikipedia for {topic}")
-            if wiki_contexts:
-                for context in wiki_contexts:
-                    summary = self.generate_instruction(wiki_contexts[context], topic)
-                    if summary:
-                        self.logger.info(f"Generated summary for {topic} from Wikipedia context. ({self.send_count} / {settings.tasks.summarization.count})")
-                        self.send_to_queue(summary["instruction"], wiki_contexts[context], summary["summary"])
-            else:
-                self.logger.warning(f"Failed to retrieve context from Wikipedia for {topic}... skipping.")
+            try:
+                wiki_contexts = retriever.get_contexts(topic)
+                self.logger.info(f"Retrieved {len(wiki_contexts)} contexts from Wikipedia for {topic}")
+                if wiki_contexts:
+                    for context in wiki_contexts:
+                        summary = self.generate_instruction(wiki_contexts[context], topic)
+                        if summary:
+                            self.logger.info(f"Generated summary for {topic} from Wikipedia context. ({self.send_count} / {settings.tasks.summarization.count})")
+                            self.send_to_queue(summary["instruction"], wiki_contexts[context], summary["summary"])
+                else:
+                    self.logger.warning(f"Failed to retrieve context from Wikipedia for {topic}... skipping.")
+            except Exception as e:
+                self.logger.error(f"Failed to retrieve context from Wikipedia for {topic} due to error: {e}")
 
             num_model_context_to_generate = random.randint(1, 5)
             for _ in range(num_model_context_to_generate):

@@ -8,9 +8,9 @@ from ..wiki import WikipediaContextRetriever
 from clsit.models import get_system_prompt
 
 class MultipleChoicePrompter(BasePrompter):
-    def __init__(self, model_wrapper, data_queue, topics, done_event):
+    def __init__(self, model_wrapper, data_queue, topics, done_event, rank=0):
         self.prompter_name = "multiple_choice"
-        super().__init__(model_wrapper, data_queue, topics, done_event, self.prompter_name)
+        super().__init__(model_wrapper, data_queue, topics, done_event, self.prompter_name, rank)
 
         mc_schema = {
             "question": {"type": "string", "required": True},
@@ -25,7 +25,7 @@ class MultipleChoicePrompter(BasePrompter):
         messages = [
             {
                 "role": "user",
-                "content": f"Write a comprehensive and detailed {style} that is related to {topic}. Ensure your output only contains the {style} and nothing else.",
+                "content": f"Write a long, comprehensive and detailed {style} that is related to {topic}. Ensure your output only contains the {style} and nothing else.",
             }
         ]
 
@@ -40,7 +40,7 @@ class MultipleChoicePrompter(BasePrompter):
             messages = [
                 {
                     "role": "user",
-                    "content": f"Generate a multiple-choice question focusing on the given context. The question should only have one correct choice. Use only the given context to create your question and answer choices. Do not use external information.\n\n<context>{context}</context>\n\nDO NOT USE any ordinal information (DO NOT USE eg: first anser is correct, all of the above is correct, etc) of the choices to answer your question as the choices will be shuffled later. Ensure your output is in the following format:\n<format>\nQuestion: [Your question]\nChoices:\n- [Choice 1]\n- [Choice 2]\n- [Choice 3]\n- [Choice 4]\nAnswer: [Explaination + Reasoning + Correct Answer (in this order exactly)]\n</format>\n\nYour output should contain ONLY ONE multiple-choice question exactly in the specified format without any additional text.",
+                    "content": f"Generate a long and challenging multiple-choice question focusing on the given context. The question should only have one correct choice. Use only the given context to create your question and answer choices. Do not use external information.\n\n<context>{context}</context>\n\nDO NOT USE any ordinal information (DO NOT USE eg: first anser is correct, all of the above is correct, etc) of the choices to answer your question as the choices will be shuffled later. Ensure your output is in the following format:\n<format>\nQuestion: [Your question]\nChoices:\n- [Choice 1]\n- [Choice 2]\n- [Choice 3]\n- [Choice 4]\nAnswer: [Explaination + Reasoning + Correct Answer (in this order exactly)]\n</format>\n\nYour output should contain ONLY ONE multiple-choice question exactly in the specified format without any additional text.",
                 },
                 {
                     "role": "assistant",
@@ -51,7 +51,7 @@ class MultipleChoicePrompter(BasePrompter):
             response, _ = self.wrapper.generate(
                 messages,
                 temperature=abs(
-                    settings.tasks.multiple_choice.temperature - (0.1 * n)
+                    round(settings.tasks.multiple_choice.temperature - (0.1 * n), 3)
                 ),
                 max_tokens=settings.tasks.multiple_choice.max_tokens,
                 system=get_system_prompt(),

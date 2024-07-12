@@ -23,7 +23,7 @@ def quality_control_worker(i, chunk, output_file):
     logger.addHandler(stream_handler)
     logger.info(f"Starting Quality Control Worker {i}")
 
-    wrapper = get_model_wrapper()
+    wrapper = get_model_wrapper(qc=True)
 
     for j, row in enumerate(chunk):
         if row["context"] is None or pd.isna(row["context"]) or row["context"] == "":
@@ -40,8 +40,6 @@ def quality_control_worker(i, chunk, output_file):
             max_tokens=settings.quality_control.max_tokens,
             system=SYSTEM_PROMPT,
         )
-
-        print(response)
 
         # Check if rating exists in the response
         rating = None
@@ -112,9 +110,11 @@ def quality_control(logger):
     logger.info(f"Starting quality control for {len(cleaned_data)} rows.")
 
     # Split the data into chunks for parallel processing
-    num_chunks = min(multiprocessing.cpu_count(), 8)
+    # num_chunks = min(multiprocessing.cpu_count(), 64)
+    num_chunks = 1024
     chunk_size = len(cleaned_data) // num_chunks
     chunks = [cleaned_data[i:i + chunk_size] for i in range(0, len(cleaned_data), chunk_size)]
+    logger.info(f"Split data into {num_chunks} chunks for parallel processing.")
 
     # Create a multiprocessing pool
     pool = multiprocessing.Pool(processes=num_chunks)

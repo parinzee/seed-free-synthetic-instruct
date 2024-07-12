@@ -1,5 +1,6 @@
 import torch
 import faiss
+import numpy as np
 from pathlib import Path
 
 import pandas as pd
@@ -13,7 +14,12 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 def clean_data(logger):
     # Load data
     logger.info("Starting Clean Data")
-    data = pd.read_json(Path(settings.general.output_dir) / "data.jsonl", lines=True)
+    if (Path(settings.general.output_dir) / "quality_controlled_data.jsonl").exists():
+        data = pd.read_json(
+            Path(settings.general.output_dir) / "quality_controlled_data.jsonl", lines=True
+        )
+    else:
+        data = pd.read_json(Path(settings.general.output_dir) / "data.jsonl", lines=True)
     logger.info(f"Loaded {len(data)} rows of data.")
     logger.info(f"Types of Prompters:\n{data['type'].value_counts()}")
 
@@ -54,13 +60,13 @@ def clean_data(logger):
             show_progress_bar=True,
             normalize_embeddings=True,
             convert_to_numpy=True,
-            batch_size=4,
+            batch_size=16,
         )
         logger.info(f"Embeddings shape: {embeddings.shape}")
 
         # Create faiss index
         index = faiss.IndexFlatIP(embeddings.shape[1])
-        index.add(embeddings)
+        index.add(embeddings.to(dtype=np.float32))
 
         # Find duplicates
         D, I = index.search(

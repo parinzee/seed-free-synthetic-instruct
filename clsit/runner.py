@@ -3,6 +3,7 @@ import threading
 import queue
 import random
 import logging
+import copy
 
 from clsit.export import export_data
 from clsit.clean import clean_data
@@ -18,6 +19,7 @@ from clsit.prompters.summarization import SummarizationPrompter
 from clsit.prompters.conversation import ConversationPrompter
 from clsit.prompters.jokes import JokesPrompter
 from clsit.prompters.multiple_choice import MultipleChoicePrompter
+from clsit.prompters.brainstorming import BrainstormingPrompter
 
 # Map the task to the prompter class
 task_to_prompter = {
@@ -26,9 +28,10 @@ task_to_prompter = {
     "conversation": ConversationPrompter,
     # "jokes": JokesPrompter,
     "multiple_choice": MultipleChoicePrompter,
+    "brainstorming": BrainstormingPrompter,
 }
 
-def generate(logger):
+def generate(logger, qc=False):
     # Attempt to load topics from disk
     general_topics, cultural_topics = TopicGenerator.load_topics()
     logger.info(f"Loaded {len(general_topics)} general topics and {len(cultural_topics)} cultural topics from disk.")
@@ -59,16 +62,17 @@ def generate(logger):
     prompter_events = []
     for task in task_to_prompter:
         if task in settings.general.llm_task_types:
-            prompter = task_to_prompter[task]
-            prompter_event = threading.Event()
-            prompter_thread = threading.Thread(
-                target=prompter.start,
-                args=(get_model_wrapper(), data_queue, topics, prompter_event),
-            )
+            for rank in range(settings.tasks.num_threads_per_task):
+                prompter = copy.deepcopy(task_to_prompter[task])
+                prompter_event = threading.Event()
+                prompter_thread = threading.Thread(
+                    target=prompter.start,
+                    args=(get_model_wrapper(), data_queue, topics, prompter_event, rank),
+                )
 
-            prompter_events.append(prompter_event)
-            prompter_threads.append(prompter_thread)
-            prompter_thread.start()
+                prompter_events.append(prompter_event)
+                prompter_threads.append(prompter_thread)
+                prompter_thread.start()
     
     # Wait for all prompter threads to finish
     for prompter_event in prompter_events:
@@ -103,7 +107,7 @@ if __name__ == "__main__":
     parser.add_argument("--diversify", action="store_true", help="Diversify the generated data")
     parser.add_argument("--qc", action="store_true", help="Run quality control on the generated data")
     parser.add_argument("--export", action="store_true", help="Export the generated data for training with axolotl")
-    parser.add_argument("--val_size", type=float, default=0.125, help="Fractionn of validation set size")
+    parser.add_argument("--val_size", type=float, default=0.125, help="Fraction of validation set size")
     parser.add_argument("config", type=str, help="Path to the configuration file", default="settings.toml")
 
     args = parser.parse_args()
@@ -112,7 +116,7 @@ if __name__ == "__main__":
         settings.load_file(args.config)
 
     if args.generate:
-        generate(logger)
+        generate(logger, args.qc)
     
     if args.qc:
         quality_control(logger)

@@ -5,9 +5,9 @@ from ..config import settings
 from clsit.models import get_system_prompt
 
 class JokesPrompter(BasePrompter):
-    def __init__(self, model_wrapper, data_queue, topics, done_event):
+    def __init__(self, model_wrapper, data_queue, topics, done_event, rank=0):
         self.prompter_name = "jokes"
-        super().__init__(model_wrapper, data_queue, topics, done_event, self.prompter_name)
+        super().__init__(model_wrapper, data_queue, topics, done_event, self.prompter_name, rank)
         self.logger.info(f"Starting JokesPrompter with {settings.tasks.jokes.count} jokes to generate, currently at {self.send_count}.")
 
     def generate_instruction(self, context, topic, max_retries=3):

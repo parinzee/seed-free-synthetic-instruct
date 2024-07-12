@@ -19,7 +19,9 @@ class DataThread:
     def run(self):
         while not self.done_event.is_set():
             if not self.data_queue.empty():
-                self.data.append(self.data_queue.get())
+                while not self.data_queue.empty():
+                    self.data.append(self.data_queue.get())
+
                 if len(self.data) > 2:
                     df = pd.DataFrame(self.data)
                     df.to_csv(self.save_dir / "data.csv", index=False)

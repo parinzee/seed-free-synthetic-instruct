@@ -6,9 +6,9 @@ from ..config import settings
 from clsit.models import get_system_prompt
 
 class ConversationPrompter(BasePrompter):
-    def __init__(self, model_wrapper, data_queue, topics, done_event):
+    def __init__(self, model_wrapper, data_queue, topics, done_event, rank=0):
         self.prompter_name = "conversation"
-        super().__init__(model_wrapper, data_queue, topics, done_event, self.prompter_name)
+        super().__init__(model_wrapper, data_queue, topics, done_event, self.prompter_name, rank)
         self.logger.info(f"Starting ConversationPrompter with {settings.tasks.conversation.count} conversations to generate, currently at {self.send_count}.")
 
     def generate_instruction(self, context, topic, max_retries=3):
@@ -16,7 +16,7 @@ class ConversationPrompter(BasePrompter):
             messages = [
                 {
                     "role": "user",
-                    "content": f"Generate a conversation between a user and an AI assistant on the topic of {topic}. The user's message should be a question or a statement related to {topic}, and the AI assistant should provide a relevant, engaging response to maintain a friendly and casual conversation. The AI should never refuse to answer a question. Prioritize the conversation to ALWAYS be long, detailed, and very informative. The output should be in the following format:\n\n<format>Input: [User's message]\nOutput: [AI assistant's response]</format>\n\nEnsure your output contains ONLY ONE input-output pair exactly in the specified format without any additional text.",
+                    "content": f"Generate a very long, lengthy, and detailed conversation between a user and an AI assistant on the topic of {topic}. The user's message should be a question or a statement related to {topic}, and the AI assistant should provide a relevant, engaging response to maintain a friendly and casual conversation. The AI should never refuse to answer a question. Prioritize the conversation to ALWAYS be long, detailed, and very informative. The output should be in the following format:\n\n<format>Input: [User's message]\nOutput: [AI assistant's response]</format>\n\nEnsure your output contains ONLY ONE input-output pair exactly in the specified format without any additional text.",
                 },
                 {
                     "role": "assistant",

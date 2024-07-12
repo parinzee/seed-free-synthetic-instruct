@@ -8,9 +8,9 @@ from ..wiki import WikipediaContextRetriever
 from clsit.models import get_system_prompt
 
 class QAPrompter(BasePrompter):
-    def __init__(self, model_wrapper, data_queue, topics, done_event):
+    def __init__(self, model_wrapper, data_queue, topics, done_event, rank=0):
         self.prompter_name = "question_answering"
-        super().__init__(model_wrapper, data_queue, topics, done_event, self.prompter_name)
+        super().__init__(model_wrapper, data_queue, topics, done_event, self.prompter_name, rank)
 
         qa_schema = {
             "question": {"type": "string", "required": True},
@@ -39,17 +39,18 @@ class QAPrompter(BasePrompter):
             messages = [
                 {
                     "role": "user",
-                    "content": f"Generate 5 highly detailed and specialized questions and answeres focusing on different aspects of this given context. Use only the given context to create your questions. The longer the answers are, with more detailed responses, the better. Prioritize extreme explaination and detail. Do no use external information.\n\n<context>\n{context}\n</context>\n\nEnsure your output is in the format of a list of dictionaries, where each dictionary contains a 'question' key and an 'answer' key. Your output should be one line in the aforementioned format without anything else.",
+                    "content": f"Generate 5 very long, highly detailed and specialized questions and answeres focusing on different aspects of this given context. Use only the given context to create your questions. The longer the answers are, with more detailed responses, the better. Prioritize extreme explaination and detail. Do no use external information.\n\n<context>\n{context}\n</context>\n\nEnsure your output is in the format of a list of dictionaries, where each dictionary contains a 'question' key and an 'answer' key. Your output should be one line in the aforementioned format without anything else.",
                 }
             ]
 
             response, _ = self.wrapper.generate(
                 messages,
                 temperature=abs(
-                    settings.tasks.question_answering.temperature - (0.1 * n)
+                    round(settings.tasks.question_answering.temperature - (0.1 * n), 3)
                 ),
                 max_tokens=settings.tasks.question_answering.max_tokens,
                 system=get_system_prompt(),
+                top_p=0.2
             )
 
             try:
