@@ -51,7 +51,7 @@ The jsonl files will be visible in your configured output directory under:
 
 Please see some of our [axolotl configurations](https://github.com/parinzee/seed-free-synthetic-instruct/tree/main/configs) to see how to use these files to train.
 
-## Evaluation
+### Evaluation
 1. Use [VLLM](https://github.com/vllm-project/vllm) to host your finetuned model.
 2. Run prediction:
    ```
@@ -69,7 +69,11 @@ Please see some of our [axolotl configurations](https://github.com/parinzee/seed
    python3 visualize_results.py
    ```
 
-## Results
+### Results
+
+**Dataset:** We release our best performing dataset and make it publicly accessible at [Huggingface Dataset](https://huggingface.co/datasets/parinzee/seed-free-synthetic-instruct-thai-v1?row=0).
+
+**Model:** We release our best performing model at this [huggingface repo.](https://huggingface.co/parinzee/llama3-seed-free-synthetic-instruct-fcd-8b)
 
 Our best-performing synthetic dataset (F+ C+ D+) achieved competitive results compared to state-of-the-art Thai LLMs, using only 5,000 instructions. Key findings include:
 
