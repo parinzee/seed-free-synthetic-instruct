@@ -1,4 +1,9 @@
 # Seed-Free Synthetic Data Generation Framework for Instruction-Tuning LLMs: A Case Study in Thai
+### Parinthapat Pengpun, Can Udomcharoenchaikit, Weerayut Buaphet, Peerat Limkonchotiwat
+
+<p align="center">
+  <img height="700" src="https://github.com/parinzee/seed-free-synthetic-instruct/blob/main/pipeline.png?raw=true">
+</p>
 
 ## Overview
 
@@ -52,6 +57,8 @@ The jsonl files will be visible in your configured output directory under:
 Please see some of our [axolotl configurations](https://github.com/parinzee/seed-free-synthetic-instruct/tree/main/configs) to see how to use these files to train.
 
 ### Evaluation
+
+
 1. Use [VLLM](https://github.com/vllm-project/vllm) to host your finetuned model.
 2. Run prediction:
    ```
@@ -69,7 +76,8 @@ Please see some of our [axolotl configurations](https://github.com/parinzee/seed
    python3 visualize_results.py
    ```
 
-### Results
+## Results
+![Results Table](https://github.com/parinzee/seed-free-synthetic-instruct/blob/main/table.png?raw=true])
 
 **Dataset:** We release our best performing dataset and make it publicly accessible at [Huggingface Dataset](https://huggingface.co/datasets/parinzee/seed-free-synthetic-instruct-thai-v1?row=0).
 
@@ -92,8 +100,9 @@ COMING SOON
 This project is licensed under the [MIT License](LICENSE).
 
 ## Acknowledgments
+We extend our sincere gratitude to Potsawee Manakul for his invaluable assistance during the early stages of this project. 
 
-We would like to thank the creators of LLaMA, Claude, and other open-source language models and tools that made this research possible.
+This research has received funding support from the NSRF via the Program Management Unit for Human Resources \& Institutional Development, Research and Innovation Grant Number B46G670083.
 
 ## Contact
 
