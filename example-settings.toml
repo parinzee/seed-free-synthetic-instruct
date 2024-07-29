@@ -1,28 +1,47 @@
 [model]
+vllm.model = "Qwen/Qwen2-72B-Instruct-AWQ"
+vllm.host_url = "http://localhost:8000/v1/"
+vllm.api_key = "sk-wowow-wowow"
+vllm.use = false # Use vllm
+vllm.use_qc = true
+
+groq.api_key = ""
+groq.model = "llama3-70b-8192"
+groq.use = false # Use groq
+groq.use_qc = false
+
+ollama.model = 'qwen2:72b-instruct-q3_K_L'
+ollama.host_url = ""
+ollama.use = false # Use ollama
+ollama.use_qc = false
+
 anthropic.api_key = 'YOUR_API_KEY'
 anthropic.model = 'claude-3-sonnet-20240229'
-anthropic.use = true # Use the Anthropic model to generate data
+anthropic.use = false # Use the Anthropic model to generate data
+anthropic.use_qc = false
 
 openai.api_key = 'YOUR_API_KEY'
 openai.model = 'gpt-4-turbo'
 openai.use = false # Use the OpenAI model to generate data (cannot be used with the Anthropic model)
+openai.use_qc = false
 
 [general]
-output_dir = 'output'
-language = 'en'
-wiki_lang = 'en' # Language to use for the Wikipedia API
+output_dir = 'output-qwen'
+language = 'th'
+wiki_lang = 'th' # Language to use for the Wikipedia API
 use_wiki = true # Use the Wikipedia API to get articles for the tasks
 
-num_topics = 200
-topic_generation_temperature = 0.7
+num_topics = 1000
+topic_generation_temperature = 0.85
 topic_generation_max_tokens = 400
+custom_system_prompt = "ตรวจสอบให้แน่ใจว่าการตอบสนองและเอาต์พุตทั้งหมดของคุณ นอกเหนือจากคีย์รูปแบบที่กำหนดไว้ล่วงหน้า เป็นภาษาไทย จงตอบเป็นภาษาไทยเสมอ" # Put something here if you want to overrride the default system prompt: "Ensure that ALL of your response and output, other than pre-specified format keys, is in the {language} language. Always output in {language} even when input is in other languages."
 
 llm_task_types = [
     'question_answering',
     'multiple_choice',
     'summarization',
     'translation',
-    'creative_writing',
+    'brainstorming',
     'conversation',
     'jokes',
     'debate'
@@ -49,12 +68,15 @@ response_filters = [
 ]
 
 [culture]
+num_topics = 2000
 enabled = true
-num_topics = 400
-prompt = 'You are a native Thai person with expert knowledge of Thai culture, history, language, and customs. Ensure that everything you act, do, say, and generate matches with this fact.'
+# prompt = 'You are a native Thai person with expert knowledge of Thai culture, history, language, and customs. Ensure that everything you act, do, say, and generate matches with this fact.'
+prompt = 'คุณเป็นคนไทยโดยกำเนิดที่มีความรู้ความเชี่ยวชาญเกี่ยวกับวัฒนธรรม ประวัติศาสตร์ ภาษา และประเพณีไทย ตรวจสอบให้แน่ใจว่าทุกสิ่งที่คุณกระทำ ทำ พูด และสร้างตรงกับข้อเท็จจริงนี้'
+
 
 # Configuration for the different tasks
 [tasks]
+num_threads_per_task = 5
 context_styles = [ # Used contextual tasks (e.g. summarization, translation)
     "news article",
     "blog post",
@@ -72,21 +94,21 @@ context_styles = [ # Used contextual tasks (e.g. summarization, translation)
 ]
 
     [tasks.question_answering]
-    count = 500
+    count = 25000
     batch_size = 10
 
-    temperature = 0.35
-    max_tokens = 1000
+    temperature = 0.3
+    max_tokens = 4000
 
     [tasks.multiple_choice]
-    count = 1750
+    count = 25000
     batch_size = 10
 
     temperature = 0.4
     max_tokens = 4000
 
     [tasks.summarization]
-    count = 1500
+    count = 25000
     batch_size = 10
     summary_styles = [
         "bullet point",
@@ -94,27 +116,22 @@ context_styles = [ # Used contextual tasks (e.g. summarization, translation)
         "numbered list",
     ]
 
-    [tasks.translation]
-    count = 250
-    batch_size = 10
+    temperature = 0.35
+    max_tokens = 4000
 
-    [tasks.creative_writing]
-    count = 1250
-    batch_size = 10
-
-    [tasks.conversation]
-    count = 2000 
+    [tasks.brainstorming]
+    count = 25000
     batch_size = 10
 
     temperature = 0.8
-    max_tokens = 1500
+    max_tokens = 4000
 
-    [tasks.jokes]
-    count = 500
+    [tasks.conversation]
+    count = 25000
     batch_size = 10
 
-    temperature = 0.5
-    max_tokens = 1500
+    temperature = 0.8
+    max_tokens = 4000
 
 [cleaning] # Configuration for the cleaning process
 remove_duplicates = true
