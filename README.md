@@ -32,15 +32,42 @@ This repository contains the code and resources for our paper "Seed-Free Synthet
 
 ## Data Generation
 
-COMING SOON
+1. Firstly, make a copy of `example-settings.toml`, and configure the models (openai, claude, vllm, groq, etc).
+2. Configure language within the settings to set the language
+3. Generate data!
+   ```
+   python3 -m clsit.runner --generate /path/to/yaml/config
+   ```
 
-## Model Training
+### Export Generated Data
+To get a clean jsonl file ready to be trained with [axolotl](https://github.com/OpenAccess-AI-Collective/axolotl):
+   ```
+   python3 -m clsit.runner --clean /path/to/yaml/config
+   python3 -m clsit.runner --export /path/to/yaml/config
+   ```
+The jsonl files will be visible in your configured output directory under:
+- `train_data.jsonl`
+- `val_data.jsonl`
 
-COMING SOON
+Please see some of our [axolotl configurations](https://github.com/parinzee/seed-free-synthetic-instruct/tree/main/configs) to see how to use these files to train.
 
 ## Evaluation
-
-COMING SOON
+1. Use [VLLM](https://github.com/vllm-project/vllm) to host your finetuned model.
+2. Run prediction:
+   ```
+   cd eval/
+   python3 eval_vllm.py --model-name SERVED_VLLM_MODEL_NAME --few-shot 0
+   ```
+3. Calculate scores:
+   ```
+   python3 calculate_scores.py .
+   ```
+4. Visualize scores:
+   - First, please edit [`eval/visualize_results.py`](https://github.com/parinzee/seed-free-synthetic-instruct/blob/main/eval/visualize_results.py) and put your model name in the model name dictionary
+   - Then run:
+   ```
+   python3 visualize_results.py
+   ```
 
 ## Results
 
