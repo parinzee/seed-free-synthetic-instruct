@@ -93,8 +93,26 @@ For detailed results and analysis, please refer to the paper and the `results/` 
 
 ## Citation
 
-COMING SOON
-
+```sh
+@inproceedings{pengpun-etal-2024-seed,
+    title = "Seed-Free Synthetic Data Generation Framework for Instruction-Tuning {LLM}s: A Case Study in {T}hai",
+    author = "Pengpun, Parinthapat  and
+      Udomcharoenchaikit, Can  and
+      Buaphet, Weerayut  and
+      Limkonchotiwat, Peerat",
+    editor = "Fu, Xiyan  and
+      Fleisig, Eve",
+    booktitle = "Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 4: Student Research Workshop)",
+    month = aug,
+    year = "2024",
+    address = "Bangkok, Thailand",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.acl-srw.38",
+    doi = "10.18653/v1/2024.acl-srw.38",
+    pages = "438--457",
+    abstract = "We present a synthetic data approach for instruction-tuning large language models (LLMs) for low-resource languages in a data-efficient manner, specifically focusing on Thai. We identify three key properties that contribute to the effectiveness of instruction-tuning datasets: fluency, diversity, and cultural context. We propose a seed-data-free framework for generating synthetic instruction-tuning data that incorporates these essential properties. Our framework employs an LLM to generate diverse topics, retrieve relevant contexts from Wikipedia, and create instructions for various tasks, such as question answering, summarization, and conversation. The experimental results show that our best-performing synthetic dataset, which incorporates all three key properties, achieves competitive performance using only 5,000 instructions when compared to state-of-the-art Thai LLMs trained on hundreds of thousands of instructions. Our code and dataset are publicly available at https://github.com/parinzee/seed-free-synthetic-instruct.",
+}
+```
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
